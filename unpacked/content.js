@@ -83,18 +83,18 @@ document.addEventListener('DOMContentLoaded', function () {
         if (document.getElementById('check-xhr').checked) {
             chrome.devtools.network.getHAR(function (logInfo) {
                 if (!isDownloading) {
-                    document.getElementById('status').innerHTML = 'Requests: ' + logInfo.entries.length;
+                    document.getElementById('status').innerHTML = '请求: ' + logInfo.entries.length;
                 }
                 chrome.devtools.inspectedWindow.getResources(function (resources) {
                     if (!isDownloading) {
-                        document.getElementById('status').innerHTML += ' | Static Resources: ' + resources.length;
+                        document.getElementById('status').innerHTML += ' | 静态资源: ' + resources.length;
                     }
                 })
             });
         } else {
             chrome.devtools.inspectedWindow.getResources(function (resources) {
                 if (!isDownloading) {
-                    document.getElementById('status').innerHTML = 'Static Resources count: ' + resources.length;
+                    document.getElementById('status').innerHTML = '静态资源数量: ' + resources.length;
                 }
             })
         }
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     chrome.devtools.inspectedWindow.getResources(function (resources) {
         if (!isDownloading) {
-            document.getElementById('status').innerHTML = 'Static resources count: ' + resources.length;
+            document.getElementById('status').innerHTML = '静态资源数量: ' + resources.length;
         }
     });
 
@@ -198,8 +198,8 @@ function tabCompleteForXHRHandler(tabId, changeInfo, keepDisabled) {
     if (tabId === chrome.devtools.inspectedWindow.tabId && changeInfo.status === 'complete') {
         document.getElementById('check-xhr').checked = true;
         document.getElementById('check-xhr').disabled = false;
-        document.getElementById('label-xhr').innerHTML = 'Include all assets by XHR requests (require page reload).';
-        document.getElementById('up-save').innerHTML = 'Save All Resources';
+        document.getElementById('label-xhr').innerHTML = '保留通过XHR请求的资源';
+        document.getElementById('up-save').innerHTML = '保存所有资源';
         document.getElementById('up-save').disabled = false;
         // Remove listener from further same event
         chrome.tabs.onUpdated.removeListener(tabCompleteForXHRHandler);
@@ -475,7 +475,7 @@ function allDone(isSuccess) {
     // Report in the end
     if (isSuccess) {
         endStatus.className = 'all-done';
-        endStatus.innerHTML = 'Downloaded All Files !!!';
+        endStatus.innerHTML = '下载完成 !!!';
         document.getElementById('debug').insertBefore(endStatus, document.getElementById('debug').childNodes[0]);
 
         var openDownload = document.createElement('button');
@@ -483,7 +483,7 @@ function allDone(isSuccess) {
         openDownload.addEventListener('click', function () {
             chrome.downloads.showDefaultFolder();
         });
-        document.getElementById('open-folder').innerHTML = 'Resources Folder: ';
+        document.getElementById('open-folder').innerHTML = '下载资源路径: ';
         document.getElementById('open-folder').appendChild(openDownload);
 
     } else {
@@ -493,7 +493,7 @@ function allDone(isSuccess) {
     }
 
     // Restore/Change button state
-    document.getElementById('up-save').innerHTML = 'Re-Download?';
+    document.getElementById('up-save').innerHTML = '重新下载';
     document.getElementById('up-save').disabled = false;
 }
 
@@ -1004,7 +1004,7 @@ function addItemsToZipWriter(blobWriter, items, callback) {
                             addItemsToZipWriter(blobWriter, rest, callback);
 
                             // Update Status
-                            document.getElementById('status').innerHTML = 'Compressed: ' + item.url;
+                            document.getElementById('status').innerHTML = '完成: ' + item.url;
 
                             // Update Report Table
                             newList.className = 'each-done';
