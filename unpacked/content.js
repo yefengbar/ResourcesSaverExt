@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('check-xhr').addEventListener('change', function (e) {
         if (e.target.checked) {
             // If change from false to true
-            document.getElementById('label-xhr').innerHTML = 'Reloading page for collecting XHR requests ...'; //Include all assets by XHR requests
-            document.getElementById('up-save').innerHTML = 'Waiting for reload';
+            document.getElementById('label-xhr').innerHTML = '正在刷新页面获取XHR请求 ...'; //Include all assets by XHR requests
+            document.getElementById('up-save').innerHTML = '等待刷新';
             document.getElementById('up-save').disabled = true;
             // Add listener, only when the check box is from unchecked to checked
             chrome.tabs.onUpdated.addListener(tabCompleteForXHRHandler);
